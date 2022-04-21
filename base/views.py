@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import Tutorial, EnrolledTutorial
-from user.models import MainUser, Skill, IT
+from user.models import MainUser, Skill
 
 class HomeView(View):
     def get(self, request):
