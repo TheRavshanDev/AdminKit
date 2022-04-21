@@ -12,7 +12,7 @@ class HomeView(View):
 class CourseDetailView(View):
     def get(self, request,pk):
         tutorial = Tutorial.objects.get(id=pk)
-        tutorial.views =+ 1
+        tutorial.tutorial_views =+ 1
         tutorial.save() 
         return render(request, 'course-details.html',{'tutorial':tutorial})
     
