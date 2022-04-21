@@ -9,6 +9,7 @@ class MainUser(models.Model):
     live_address = models.CharField(max_length=110)
     work = models.CharField(max_length=100)
     about = models.TextField(max_length=500)
+    photo = models.ImageField(upload_to='users-avatar')
 
     def __str__(self):
         return self.user.username
@@ -29,8 +30,8 @@ class IT(models.Model):
 
 class Skill(models.Model):
     user = models.ForeignKey(MainUser, on_delete=models.CASCADE)
-    yonalish = models.ForeignKey(IT, on_delete=models.SET_NULL, null=True)
-    skills = models.CharField(max_length=400)
+    yonalish = models.ForeignKey(IT, on_delete=models.SET_NULL, null=True, blank=True)
+    skills = models.CharField(max_length=400, null=True, blank=True)
 
     def __str__(self):
         return self.user.first_name

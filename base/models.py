@@ -6,6 +6,7 @@ class Tutorial(models.Model):
     tutorial_name = models.CharField(max_length=150)
     tutorial_description = models.TextField(max_length=200)
     tutorial_photo = models.ImageField(upload_to='tutorial-photos')
+    tutorial_views = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.tutorial_name
@@ -24,3 +25,14 @@ class TutorialMedia(models.Model):
     class Meta:
         verbose_name = "Tutorial's media file"
         verbose_name_plural = "Tutorials media file"
+
+class EnrolledTutorial(models.Model):
+    user = models.ForeignKey(MainUser, on_delete=models.CASCADE)
+    tutorial = models.ForeignKey(Tutorial, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"User: {self.user.first_name}, Tutorial: {self.tutorial.tutorial_name}"
+
+    class Meta:
+        verbose_name = "Enrolled Tutorial"
+        verbose_name_plural = "Enrolled Tutorials"

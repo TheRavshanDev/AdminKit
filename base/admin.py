@@ -3,3 +3,4 @@ from .models import *
 
 admin.site.register(Tutorial)
 admin.site.register(TutorialMedia)
+admin.site.register(EnrolledTutorial)
