@@ -1,5 +1,8 @@
+from ast import Add
 from django.urls import path
-from .views import HomeView, ProfileView, AnalyticView, NotificationView, EnrolledTutorialView
+from .views import (HomeView, ProfileView, AnalyticView, NotificationView, EnrolledTutorialView, 
+                    CourseDetailView, AddEnrolledCourseView)
+    
 
 urlpatterns = [
     path('dashboard/',HomeView.as_view(), name='home'),
@@ -7,4 +10,6 @@ urlpatterns = [
     path('analytic/',AnalyticView.as_view(), name='analytic'),
     path('notifications/',NotificationView.as_view(), name='notifications'),
     path('tutorials/',EnrolledTutorialView.as_view(), name='tutorial'),
+    path('tutorial/<int:pk>/',CourseDetailView.as_view(), name='tutorial-detail'),
+    path('tutorial/<int:pk>/added/',AddEnrolledCourseView.as_view(), name='add-enrolled')
 ]
