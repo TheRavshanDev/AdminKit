@@ -9,7 +9,7 @@ class MainUser(models.Model):
     live_address = models.CharField(max_length=110)
     work = models.CharField(max_length=100)
     about = models.TextField(max_length=500)
-    photo = models.ImageField(upload_to='users-avatar')
+    photo = models.ImageField(upload_to='users-avatar', blank=True, null=True)
 
     def __str__(self):
         return self.user.username

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from .models import Tutorial, EnrolledTutorial
 from user.models import MainUser, Skill
+from django.contrib import messages
 
 class HomeView(View):
     def get(self, request):
@@ -12,18 +13,25 @@ class HomeView(View):
 class CourseDetailView(View):
     def get(self, request,pk):
         tutorial = Tutorial.objects.get(id=pk)
-        tutorial.tutorial_views =+ 1
-        tutorial.save()
+        mainuser = MainUser.objects.get(user=request.user)
+        if tutorial.user != mainuser:
+            tutorial.tutorial_views += 1
+            tutorial.save()
+        else:
+            pass
         return render(request, 'course-details.html',{'tutorial':tutorial})
     
 class AddEnrolledCourseView(View):
     def get(self, request, pk):
         mainuser = MainUser.objects.get(user=request.user)
         tutorial = Tutorial.objects.get(id=pk)
-        enroll = EnrolledTutorial.objects.create(
-            user=mainuser,
-            tutorial=tutorial
-        )
+        if not Tutorial.id == tutorial:
+            enroll = EnrolledTutorial.objects.create(
+                user=mainuser,
+                tutorial=tutorial
+            )
+        else:
+            messages.error(request, "You are already enrolled this course")
         return redirect('home')
 
 class ProfileView(View):

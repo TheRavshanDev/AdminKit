@@ -40,6 +40,9 @@
 								<div class="m-sm-4">
 									<div class="text-center">
 									</div>
+									{% for message in messages %}
+										{{ message }}
+									{% endfor %}
 									<form method="POST">{% csrf_token %}
 										<div class="mb-3">
 											<label class="form-label">Username</label>
