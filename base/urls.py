@@ -1,7 +1,7 @@
 from ast import Add
 from django.urls import path
 from .views import (HomeView, ProfileView, AnalyticView, NotificationView, EnrolledTutorialView, 
-                    CourseDetailView, AddEnrolledCourseView)
+                    CourseDetailView, AddEnrolledCourseView, EditProfileView)
     
 
 urlpatterns = [
@@ -11,5 +11,6 @@ urlpatterns = [
     path('notifications/',NotificationView.as_view(), name='notifications'),
     path('tutorials/',EnrolledTutorialView.as_view(), name='tutorial'),
     path('tutorial/<int:pk>/',CourseDetailView.as_view(), name='tutorial-detail'),
-    path('tutorial/<int:pk>/added/',AddEnrolledCourseView.as_view(), name='add-enrolled')
+    path('tutorial/<int:pk>/added/',AddEnrolledCourseView.as_view(), name='add-enrolled'),
+    path('profile/edit/',EditProfileView.as_view(), name='edit-profile'),
 ]

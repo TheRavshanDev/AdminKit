@@ -13,7 +13,7 @@ class CourseDetailView(View):
     def get(self, request,pk):
         tutorial = Tutorial.objects.get(id=pk)
         tutorial.tutorial_views =+ 1
-        tutorial.save() 
+        tutorial.save()
         return render(request, 'course-details.html',{'tutorial':tutorial})
     
 class AddEnrolledCourseView(View):
@@ -46,3 +46,7 @@ class EnrolledTutorialView(View):
         mainuser = MainUser.objects.get(user=request.user)
         enrolled = EnrolledTutorial.objects.filter(user=mainuser)
         return render(request, 'ui-cards.html',{'mainuser':mainuser,'enrolled':enrolled})
+
+class EditProfileView(View):
+    def get(self, request):
+        return render(request, 'ui-forms.html')
