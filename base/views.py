@@ -3,6 +3,7 @@ from django.views import View
 from .models import Tutorial, EnrolledTutorial
 from user.models import MainUser, Skill
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 class HomeView(View):
     def get(self, request):
@@ -57,4 +58,28 @@ class EnrolledTutorialView(View):
 
 class EditProfileView(View):
     def get(self, request):
-        return render(request, 'ui-forms.html')
+        mainuser = MainUser.objects.get(user=request.user)
+        user = User.objects.get(username=mainuser)
+        skill = Skill.objects.get(user=mainuser)
+        return render(request, 'ui-forms.html',{'mainuser':mainuser, 'skill':skill})
+
+    def post(self, request):
+        mainuser = MainUser.objects.get(user=request.user)
+        user = User.objects.get(username=mainuser)
+        skill = Skill.objects.get(user=mainuser)
+        if request.POST['f-name']:
+            mainuser.first_name = request.POST['f-name']
+        if request.POST['l-name']:
+            mainuser.last_name = request.POST['l-name']
+        if request.POST['username']:
+            user.username = request.POST['username']
+        if request.POST['birth-address']:
+            mainuser.birth_address = request.POST['birth-address']
+        if request.POST['live-address']:
+            mainuser.live_address = request.POST['live-address']
+        if request.POST['work']:
+            mainuser.work = request.POST['work']
+        if request.POST['about']:
+            mainuser.about = request.POST['about']
+        mainuser.save()
+        return redirect('home')
