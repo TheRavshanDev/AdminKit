@@ -66,7 +66,6 @@ class EditProfileView(View):
     def post(self, request):
         mainuser = MainUser.objects.get(user=request.user)
         user = User.objects.get(username=mainuser)
-        skill = Skill.objects.get(user=mainuser)
         if request.POST['f-name']:
             mainuser.first_name = request.POST['f-name']
         if request.POST['l-name']:
@@ -82,4 +81,15 @@ class EditProfileView(View):
         if request.POST['about']:
             mainuser.about = request.POST['about']
         mainuser.save()
+        return redirect('home')
+
+class EditProfileSkillsView(View):
+    def get(self, request):
+        return render(request, 'ui-forms.html')
+    
+    def post(self, request):
+        mainuser = MainUser.objects.get(user=request.user)
+        skill = Skill.objects.get(user=mainuser)
+        skill.skills = request.POST['skills']
+        skill.save()
         return redirect('home')

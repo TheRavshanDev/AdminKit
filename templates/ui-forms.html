@@ -286,13 +286,11 @@
 									<h5 class="card-title mb-0">Skills</h5>
 								</div>
 								<div class="card-body">
-									<form method="post">{% csrf_token %}
+									<form action="{% url 'edit-profile-skill' %}" method="post">{% csrf_token %}
 										<input type="text" class="form-control" name="skills" value="{{ skill.skills }}"><br>
 										<button type="submit" class="btn btn-primary">Save</button>
 									</form>
 								</div>
-
-							
 						</div>
 					</div>
 
