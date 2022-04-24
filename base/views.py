@@ -44,11 +44,13 @@ class ProfileView(View):
 
 class AnalyticView(View):
     def get(self, request):
-        return render(request, 'index.html')
+        mainuser = MainUser.objects.get(user=request.user)
+        return render(request, 'index.html', {'mainuser':mainuser})
 
 class NotificationView(View):
     def get(self, request):
-        return render(request, 'notifications.html')
+        mainuser = MainUser.objects.get(user=request.user)
+        return render(request, 'notifications.html',{'mainuser':mainuser})
 
 class EnrolledTutorialView(View):
     def get(self, request):
@@ -80,6 +82,8 @@ class EditProfileView(View):
             mainuser.work = request.POST['work']
         if request.POST['about']:
             mainuser.about = request.POST['about']
+        if request.POST.get('photo'):
+            mainuser.photo = request.POST.get('photo')
         mainuser.save()
         return redirect('home')
 

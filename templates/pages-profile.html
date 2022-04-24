@@ -61,7 +61,7 @@
 				</li>
 				<li class="sidebar-item">
 					<a class="sidebar-link" href="{% url 'tutorial' %}">
-			<i class="align-middle" data-feather="grid"></i> <span class="align-middle">{Tutorial name}</span>
+			<i class="align-middle" data-feather="grid"></i> <span class="align-middle">My tutorials</span>
 		</a>
 				</li>
 			</ul>
@@ -259,9 +259,12 @@
 										<div class="text-muted mb-2">{{ skills.yonalish }}</div>
 
 										<div>
-											<!-- <a class="btn btn-primary btn-sm" href="#">Follow</a>  -->
-											<a class="btn btn-primary btn-sm" href="{% url 'edit-profile' %}">Edit profile</a>
+											{% if mainuser.user == user %}
+												<a class="btn btn-primary btn-sm" href="{% url 'edit-profile' %}">Edit profile</a>
 											<!-- <a class="btn btn-primary btn-sm" href="#"><span data-feather="message-square"></span> Message</a> -->
+											{% else %}
+												<a class="btn btn-primary btn-sm" href="#">Follow</a>
+											{% endif %}
 										</div>
 									</div>
 									<hr class="my-0" />

@@ -35,23 +35,23 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="index.html">
+						<a class="sidebar-link" href="{% url 'home' %}">
 			  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
 			</a>
 					</li>
 		
 					<li class="sidebar-item active">
-						<a class="sidebar-link" href="pages-profile.html">
+						<a class="sidebar-link" href="{% url 'profile' %}">
 			  <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
 			</a>
 					</li>
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="index.html">
+						<a class="sidebar-link" href="{% url 'analytic' %}">
 			  <i class="align-middle" data-feather="book"></i> <span class="align-middle">Analytics</span>
 			</a>
 					</li>
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="notifications.html">
+						<a class="sidebar-link" href="{% url 'notifications' %}">
 			  <i class="align-middle" data-feather="bell"></i> <span class="align-middle">Notifications</span>
 			</a>
 					</li>		
@@ -59,8 +59,8 @@
 						Tools
 					</li>
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="ui-cards.html">
-			  <i class="align-middle" data-feather="grid"></i> <span class="align-middle">{Tutorial name}</span>
+						<a class="sidebar-link" href="{% url 'tutorial' %}">
+			  <i class="align-middle" data-feather="grid"></i> <span class="align-middle">My tutorials</span>
 			</a>
 					</li>
 				</ul>
@@ -245,10 +245,7 @@
 				<div class="container-fluid p-0">
 
 					<div class="mb-3">
-						<h1 class="h3 d-inline align-middle">Forms</h1>
-						<a class="badge bg-dark text-white ms-2" href="upgrade-to-pro.html">
-      Get more form examples
-  </a>
+						<h1 class="h3 d-inline align-middle">Edit</h1>
 					</div>
 					<div class="row">
 						<div class="col-12 col-lg-6">
@@ -257,7 +254,7 @@
 									<h5 class="card-title mb-0">Personal Information</h5>
 								</div>
 								<div class="card-body">
-									<form method="post">{% csrf_token %}
+									<form method="POST" enctype="multipart/form-data">{% csrf_token %}
 										<input type="text" name="f-name" class="form-control" placeholder="{{ mainuser.first_name }}"><br>
 										<input type="text" name="l-name" class="form-control" placeholder="{{ mainuser.last_name }}"><br>
 										<input type="text" name="username" class="form-control" placeholder="{{ user.username }}"><br>
@@ -265,6 +262,7 @@
 										<input type="text" name="live-address" class="form-control" placeholder="{{ mainuser.live_address }}"><br>
 										<input type="text" name="work" class="form-control" placeholder="{{ mainuser.work }}"><br>
 										<textarea class="form-control" rows="2" placeholder="{{ mainuser.about }}" name="about"></textarea><br>
+										<input type="file" name="photo" class="form-control"><br>
 										<button type="submit" class="btn btn-primary">Save</button>
 									</form>
 								</div>
