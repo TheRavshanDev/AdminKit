@@ -10,6 +10,7 @@ class MainUser(models.Model):
     work = models.CharField(max_length=100)
     about = models.TextField(max_length=500)
     photo = models.ImageField(upload_to='users-avatar', default="profile.png")
+    login_num = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.user.username

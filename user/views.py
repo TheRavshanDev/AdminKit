@@ -33,6 +33,9 @@ class LoginView(View):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            mainuser = MainUser.objects.get(user=user)
+            mainuser.login_num += 1
+            mainuser.save()
             return redirect('home')
         else:
             messages.error(request, 'User not found!')
