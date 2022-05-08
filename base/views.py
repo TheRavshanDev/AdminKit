@@ -44,15 +44,15 @@ class ProfileView(View):
 
 class AnalyticView(View):
     def get(self, request):
-        mainuser = MainUser.objects.get(user=request.user)
-
+        tutorial = Tutorial.objects.filter(user=MainUser.objects.get(user=request.user))
+        
         labels = []
         data = []
-        user2 = MainUser.objects.order_by('-login_num')[:3]
-        for person in user2:
-            labels.append(person.first_name)
-            data.append(person.login_num)
-        return render(request, 'index.html', {'mainuser':mainuser, 'labels':labels, 'data':data, 'user2':user2})
+        tutorial_views = Tutorial.objects.order_by('-tutorial_views')[:3]
+        for person in tutorial_views:
+            labels.append(person.tutorial_name)
+            data.append(person.tutorial_views)
+        return render(request, 'index.html', {'mainuser':tutorial, 'labels':labels, 'data':data, 'user2':tutorial_views})
 
 class NotificationView(View):
     def get(self, request):
