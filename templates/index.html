@@ -370,18 +370,12 @@
 
 										<table class="table mb-0">
 											<tbody>
-												<tr>
-													<td>Chrome</td>
-													<td class="text-end">4306</td>
-												</tr>
-												<tr>
-													<td>Firefox</td>
-													<td class="text-end">3801</td>
-												</tr>
-												<tr>
-													<td>IE</td>
-													<td class="text-end">1689</td>
-												</tr>
+												{% for label in user_labels %}
+													<tr>
+														<td>{{ label }}</td>
+														<td class="text-end">{{ order_user.login_num }}</td>
+													</tr>
+												{% endfor %}
 											</tbody>
 										</table>
 									</div>
@@ -607,9 +601,9 @@
 			new Chart(document.getElementById("chartjs-dashboard-pie"), {
 				type: "pie",
 				data: {
-					labels: ["Chrome", "Firefox", "IE"],
+					labels: {{ user_labels|safe }},
 					datasets: [{
-						data: [4306, 3801, 1689],
+						data: {{ user_data|safe }},
 						backgroundColor: [
 							window.theme.primary,
 							window.theme.warning,
