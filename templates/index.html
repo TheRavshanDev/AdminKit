@@ -370,12 +370,18 @@
 
 										<table class="table mb-0">
 											<tbody>
-												{% for label in user_labels %}
-													<tr>
-														<td>{{ label }}</td>
-														<td class="text-end">{{ order_user.login_num }}</td>
-													</tr>
-												{% endfor %}
+												<tr>
+													<td>User1</td>
+													<td class="text-end">300</td>
+												</tr>
+												<tr>
+													<td>User2</td>
+													<td class="text-end">450</td>
+												</tr>
+												<tr>
+													<td>User3</td>
+													<td class="text-end">600</td>
+												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -601,9 +607,9 @@
 			new Chart(document.getElementById("chartjs-dashboard-pie"), {
 				type: "pie",
 				data: {
-					labels: {{ user_labels|safe }},
+					labels: ["User1","User2","User3"],
 					datasets: [{
-						data: {{ user_data|safe }},
+						data: [300, 450, 600],
 						backgroundColor: [
 							window.theme.primary,
 							window.theme.warning,

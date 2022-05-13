@@ -54,24 +54,6 @@ class AnalyticView(View):
             data.append(person.tutorial_views)
         return render(request, 'index.html', {'mainuser':tutorial, 'labels':labels, 'data':data, 'user2':tutorial_views})
 
-class AnalyticUserView(View):
-    def get(self, request):
-        mainuser = MainUser.objects.get(user=request.user)
-
-        user_labels = []
-        user_data = []
-        order_user = MainUser.objects.order_by('-login_num')[:3]
-        for person in order_user:
-            user_labels.append(person.first_name)
-            user_data.append(person.login_num)
-        context = {
-            'labels':user_labels,
-            'data':user_data,
-            'mainuser':mainuser,
-            'order_user':order_user
-        }
-        return render(request, 'index.html',context)
-
 class NotificationView(View):
     def get(self, request):
         mainuser = MainUser.objects.get(user=request.user)
