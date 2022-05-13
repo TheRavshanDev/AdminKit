@@ -18,6 +18,8 @@ class Tutorial(models.Model):
 class TutorialMedia(models.Model):
     tutorial = models.ForeignKey(Tutorial, on_delete=models.CASCADE)
     tutorial_videos = models.FileField(upload_to='tutorial-videos')
+    video_name = models.CharField(max_length=300)
+    video_description = models.TextField()
 
     def __str__(self):
         return self.tutorial.tutorial_name

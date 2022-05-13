@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Tutorial, EnrolledTutorial
+from .models import Tutorial, EnrolledTutorial, TutorialMedia
 from user.models import MainUser, Skill
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -104,3 +104,8 @@ class EditProfileSkillsView(View):
         skill.skills = request.POST['skills']
         skill.save()
         return redirect('home')
+
+class EnterCourse(View):
+    def get(self, request, pk):
+        tutorial_media = TutorialMedia.objects.filter(tutorial=pk)
+        return render(request, 'course-media-files.html',{'tutorial_media':tutorial_media})
