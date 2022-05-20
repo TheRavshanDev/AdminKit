@@ -107,5 +107,6 @@ class EditProfileSkillsView(View):
 
 class EnterCourse(View):
     def get(self, request, pk):
+        enrolled_tutorial = EnrolledTutorial.objects.get(id=pk)
         tutorial_media = TutorialMedia.objects.filter(tutorial=pk)
-        return render(request, 'course-media-files.html',{'tutorial_media':tutorial_media})
+        return render(request, 'course-media-files.html',{'tutorial_media':tutorial_media, 'enrolled_tutorial':enrolled_tutorial})

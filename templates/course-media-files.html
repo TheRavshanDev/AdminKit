@@ -237,40 +237,41 @@
 					</ul>
 				</div>
 			</nav>
-
 			<main class="content">
-                {% for media in tutorial_media %}
-                    <div class="container-fluid p-0">
-                        <div class="row">
-                            <div class="col-12 col-md-12">
-                                <div class="card">
-                                    <img class="card-img-top" src="{{ media.tutorial.tutorial_photo.url }}" alt="Unsplash">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">{{ media.tutorial.tutorial_name }}</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">{{ media.tutorial.tutorial_description }}</p>  
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+				<div class="container-fluid p-0">
+					<div class="row">
+						<div class="col-12 col-md-12">
+							<div class="card">
+								<img class="card-img-top" src="{{ enrolled_tutorial.tutorial.tutorial_photo.url }}" alt="Unsplash">
+								<div class="card-header">
+									<h5 class="card-title mb-0">{{ enrolled_tutorial.tutorial.tutorial_name }}</h5>
+								</div>
+								<div class="card-body">
+									<p class="card-text">{{ enrolled_tutorial.tutorial.tutorial_description }}</p>  	
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% for src in tutorial_media %}
                     <div class="container-fluid p-0">
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="card">
-                                    <video src="{{ media.tutorial_media.url }}">{{ media.tutorial_media.url }}</video>    
+                                    <video controls>
+                                        <source src="{{ src.tutorial_media.url }}" type="video/mp4"></source>
+                                    </video>    
                                     <div class="card-header">
-                                        <h5 class="card-title mb-0">{{ media.video_name }}</h5>
+                                        <h5 class="card-title mb-0">{{ src.video_name }}</h5>
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-text">{{ media.video_description }}</p>  
+                                        <p class="card-text">{{ src.video_description }}</p>  
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+				{% endfor %}
 			</main>
 
 			<footer class="footer">
