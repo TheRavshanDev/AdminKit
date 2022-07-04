@@ -1,5 +1,6 @@
 from django.db import models
 from user.models import MainUser
+from embed_video.fields import EmbedVideoField
 
 class Tutorial(models.Model):
     user = models.ForeignKey(MainUser, on_delete=models.SET_NULL, null=True)
@@ -16,8 +17,8 @@ class Tutorial(models.Model):
         verbose_name_plural = 'More Tutorials'
 
 class TutorialMedia(models.Model):
-    tutorial = models.ForeignKey(Tutorial, on_delete=models.CASCADE)
-    tutorial_videos = models.FileField(upload_to='tutorial-videos')
+    tutorial = models.ForeignKey(Tutorial, on_delete=models.CASCADE, related_name='tutorial_id')
+    tutorial_videos = EmbedVideoField()
     video_name = models.CharField(max_length=300)
     video_description = models.TextField()
 

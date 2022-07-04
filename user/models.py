@@ -30,7 +30,7 @@ class IT(models.Model):
         verbose_name_plural = "Yo'nalishlar"
 
 class Skill(models.Model):
-    user = models.ForeignKey(MainUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(MainUser, on_delete=models.CASCADE, blank=True, null=True)
     yonalish = models.ForeignKey(IT, on_delete=models.SET_NULL, null=True, blank=True)
     skills = models.CharField(max_length=400, null=True, blank=True)
 

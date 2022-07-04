@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Tutorial, EnrolledTutorial, TutorialMedia
+from .models import Tutorial, EnrolledTutorial
 from user.models import MainUser, Skill
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -99,14 +99,12 @@ class EditProfileSkillsView(View):
         return render(request, 'ui-forms.html')
     
     def post(self, request):
-        mainuser = MainUser.objects.get(user=request.user)
-        skill = Skill.objects.get(user=mainuser)
+        skill = Skill.objects.get(user=request.user)
         skill.skills = request.POST['skills']
         skill.save()
         return redirect('home')
 
 class EnterCourse(View):
     def get(self, request, pk):
-        enrolled_tutorial = EnrolledTutorial.objects.get(id=pk)
-        tutorial_media = TutorialMedia.objects.filter(tutorial=pk)
-        return render(request, 'course-media-files.html',{'tutorial_media':tutorial_media, 'enrolled_tutorial':enrolled_tutorial})
+        enrolled_tutorial = EnrolledTutorial.objects.filter(tutorial=pk)
+        return render(request, 'course-media-files.html',{'enrolled_tutorial':enrolled_tutorial})
